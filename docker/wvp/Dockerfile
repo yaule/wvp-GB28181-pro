@@ -10,7 +10,6 @@ RUN export DEBIAN_FRONTEND=noninteractive &&\
 
 ADD maven-settings.xml /usr/share/maven/conf/settings.xml
 
-
 RUN cd /home && \
         git clone "${gitUrl}/wvp-GB28181-pro.git"
 
@@ -64,6 +63,6 @@ RUN export DEBIAN_FRONTEND=noninteractive &&\
         rm -rf /var/lib/apt/lists/*dic
 COPY --from=build /opt /opt
 WORKDIR /opt/wvp
-RUN chown -R nobody:nogroup /opt/wvp /opt/media /opt/assist
-ADD supervisord.conf /etc/supervisor/supervisord.conf
-CMD ["/usr/bin/supervisord"]
+ADD supervisord.conf /opt/supervisord.conf
+RUN chown -R nobody:nogroup /opt/wvp /opt/media /opt/assist /opt/supervisord.conf
+CMD ["/usr/bin/supervisord","-c","/opt/supervisord.conf"]

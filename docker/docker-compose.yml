@@ -9,8 +9,18 @@ services:
       - ./redis/data/:/data
     environment:
       REDIS_ARGS: "--save 60 1000 --appendonly yes --requirepass MCKNF5_aEjgHfV9M"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256m
+        reservations:
+          cpus: "0.01"
+          memory: 10m
 
   wvp:
+    depends_on:
+      - redis
     networks:
       - wvp_net
     build:
@@ -48,8 +58,14 @@ services:
       WVP_JVM_CONFIG: -Xms128m -Xmx256m
       ASSIST_CONFIG:
       WVP_CONFIG:
-    depends_on:
-      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1g
+        reservations:
+          cpus: "0.01"
+          memory: 10m
 
 networks:
   wvp_net:
