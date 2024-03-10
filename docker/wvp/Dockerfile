@@ -61,10 +61,9 @@ RUN export DEBIAN_FRONTEND=noninteractive &&\
         apt-get install -y --no-install-recommends openjdk-11-jre ca-certificates ffmpeg language-pack-zh-hans supervisor && \
         apt-get autoremove -y && \
         apt-get clean -y && \
-        rm -rf /var/lib/apt/lists/*dic && \
-        chown -R nobody:nogroup /opt/wvp /opt/media /opt/assist
-
+        rm -rf /var/lib/apt/lists/*dic
 COPY --from=build /opt /opt
 WORKDIR /opt/wvp
+RUN chown -R nobody:nogroup /opt/wvp /opt/media /opt/assist
 ADD supervisord.conf /etc/supervisor/supervisord.conf
 CMD ["/usr/bin/supervisord"]
