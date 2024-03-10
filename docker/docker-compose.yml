@@ -1,6 +1,8 @@
 version: "3"
 services:
   redis:
+    networks:
+      - wvp_net
     image: redis/redis-stack-server
     restart: always
     volumes:
@@ -9,6 +11,8 @@ services:
       REDIS_ARGS: "--save 60 1000 --appendonly yes --requirepass MCKNF5_aEjgHfV9M"
 
   wvp:
+    networks:
+      - wvp_net
     build:
       context: ./wvp
       args:
