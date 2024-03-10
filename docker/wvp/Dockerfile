@@ -63,7 +63,7 @@ RUN export DEBIAN_FRONTEND=noninteractive &&\
         rm -rf /var/lib/apt/lists/*dic
 COPY --from=build /opt /opt
 WORKDIR /opt/wvp
-ADD supervisord.conf /etc/supervisor/supervisord.conf
-ADD start.sh start.sh
-RUN chown -R nobody:nogroup /opt/wvp /opt/media /opt/assist
+# ADD supervisord.conf /etc/supervisor/supervisord.conf
+# ADD start.sh start.sh
+# RUN chown -R nobody:nogroup /opt/wvp /opt/media /opt/assist
 CMD bash -x start.sh
