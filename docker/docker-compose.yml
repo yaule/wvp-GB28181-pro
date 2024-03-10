@@ -6,8 +6,7 @@ services:
     volumes:
       - ./redis/data/:/data
     environment:
-      REDIS_ARGS: "--save 60 1000 --appendonly yes"
-      REDIS_ARGS: "--requirepass MCKNF5_aEjgHfV9M"
+      REDIS_ARGS: "--save 60 1000 --appendonly yes --requirepass MCKNF5_aEjgHfV9M"
 
   wvp:
     build:
